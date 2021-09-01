@@ -1,5 +1,44 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { Upload, Space, message } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
+
+const { Dragger } = Upload;
+
+function DraggerComprobantes({ comprobantesDe, descripcion, style }) {
+  const props = {
+    name: "file",
+    style,
+    multiple: true,
+    action: "/api/hello",
+    method: "GET",
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (status === "done") {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log("Dropped files", e.dataTransfer.files);
+    },
+  };
+  return (
+    <Dragger {...props}>
+      <p className="ant-upload-drag-icon">
+        <InboxOutlined />
+      </p>
+      <p className="ant-upload-text">{comprobantesDe}</p>
+      <p className="ant-upload-hint" style={{ padding: 10 }}>
+        {descripcion}
+      </p>
+    </Dragger>
+  );
+}
 
 export default function Home() {
   return (
@@ -10,7 +49,38 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>hola mundo</main>
+      <main style={{ padding: 20 }}>
+        <Space direction="vertical">
+          <DraggerComprobantes
+            descripcion="Arrastre aqui comprobantes de alquiler"
+            comprobantesDe="Alquiler"
+            style={{
+              minWidth: 300,
+            }}
+          />
+          <DraggerComprobantes
+            descripcion="Arrastre aqui comprobantes de expensas"
+            comprobantesDe="Expensas"
+            style={{
+              minWidth: 300,
+            }}
+          />
+          <DraggerComprobantes
+            descripcion="Arrastre aqui comprobantes de edenor"
+            comprobantesDe="Edenor"
+            style={{
+              minWidth: 300,
+            }}
+          />
+          <DraggerComprobantes
+            descripcion="Arrastre aqui comprobantes de metrogras"
+            comprobantesDe="Metrogas"
+            style={{
+              minWidth: 300,
+            }}
+          />
+        </Space>
+      </main>
 
       <footer className={styles.footer}></footer>
     </div>

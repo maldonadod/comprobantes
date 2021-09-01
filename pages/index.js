@@ -1,7 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Upload, Space, message } from "antd";
+import { Upload, Space, Tabs, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+const { TabPane } = Tabs;
 
 const { Dragger } = Upload;
 
@@ -40,6 +41,41 @@ function DraggerComprobantes({ comprobantesDe, descripcion, style }) {
   );
 }
 
+function Servicios() {
+  return (
+    <Space direction="vertical">
+      <DraggerComprobantes
+        descripcion="Arrastre aqui comprobantes de alquiler"
+        comprobantesDe="Alquiler"
+        style={{
+          minWidth: 300,
+        }}
+      />
+      <DraggerComprobantes
+        descripcion="Arrastre aqui comprobantes de expensas"
+        comprobantesDe="Expensas"
+        style={{
+          minWidth: 300,
+        }}
+      />
+      <DraggerComprobantes
+        descripcion="Arrastre aqui comprobantes de edenor"
+        comprobantesDe="Edenor"
+        style={{
+          minWidth: 300,
+        }}
+      />
+      <DraggerComprobantes
+        descripcion="Arrastre aqui comprobantes de metrogras"
+        comprobantesDe="Metrogas"
+        style={{
+          minWidth: 300,
+        }}
+      />
+    </Space>
+  );
+}
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -50,36 +86,17 @@ export default function Home() {
       </Head>
 
       <main style={{ padding: 20 }}>
-        <Space direction="vertical">
-          <DraggerComprobantes
-            descripcion="Arrastre aqui comprobantes de alquiler"
-            comprobantesDe="Alquiler"
-            style={{
-              minWidth: 300,
-            }}
-          />
-          <DraggerComprobantes
-            descripcion="Arrastre aqui comprobantes de expensas"
-            comprobantesDe="Expensas"
-            style={{
-              minWidth: 300,
-            }}
-          />
-          <DraggerComprobantes
-            descripcion="Arrastre aqui comprobantes de edenor"
-            comprobantesDe="Edenor"
-            style={{
-              minWidth: 300,
-            }}
-          />
-          <DraggerComprobantes
-            descripcion="Arrastre aqui comprobantes de metrogras"
-            comprobantesDe="Metrogas"
-            style={{
-              minWidth: 300,
-            }}
-          />
-        </Space>
+        <Tabs tabPosition="left" defaultActiveKey="1">
+          <TabPane tab="Julio" key="1">
+            <Servicios />
+          </TabPane>
+          <TabPane tab="Agosto" key="2">
+            <Servicios />
+          </TabPane>
+          <TabPane tab="Septiembre" key="3">
+            <Servicios />
+          </TabPane>
+        </Tabs>
       </main>
 
       <footer className={styles.footer}></footer>
